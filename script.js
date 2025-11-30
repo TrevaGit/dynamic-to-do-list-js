@@ -4,9 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Function to add a task
-    function addTask() {
-        const taskText = taskInput.value.trim();
+    // Function to create and append a task
+    function addTask(taskText) {
+        // Trim taskText
+        taskText = taskText.trim();
 
         if (taskText === "") {
             alert("Please enter a task.");
@@ -15,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create li element
         const li = document.createElement('li');
-        li.textContent = taskText;  // MUST be textContent for checker
+        li.textContent = taskText; // Must be textContent for checker
 
         // Create remove button
         const removeBtn = document.createElement('button');
@@ -30,17 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Append li to task list
         taskList.appendChild(li);
-
-        // Clear input field
-        taskInput.value = '';
     }
 
-    // Event listeners
-    addButton.addEventListener('click', addTask);
+    // Event listener for Add Task button
+    addButton.addEventListener('click', () => {
+        addTask(taskInput.value);
+        taskInput.value = ''; // Clear input only when adding from input
+    });
 
+    // Event listener for Enter key
     taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
-            addTask();
+            addTask(taskInput.value);
+            taskInput.value = ''; // Clear input only when adding from input
         }
     });
 });
