@@ -1,51 +1,35 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Select DOM elements
-    const addButton = document.getElementById('add-task-btn');
-    const taskInput = document.getElementById('task-input');
-    const taskList = document.getElementById('task-list');
+Result:
+Commit used:
+URL: Click here
+ID: d84ac0f9a0fca6a81ccbd9c91e8289d0f3491241
+Author: GitHub
+Subject: Update script.js
+Date: 2025-11-30 15:29:06 +0300
+Checks for files exists and not empty
 
-    // Function to add a new task
-    function addTask() {
-        // Get the input value and trim
-        const taskText = taskInput.value.trim();
+Checks for implementations:
 
-        // Check if input is empty
-        if (taskText === "") {
-            alert("Please enter a task.");
-            return;
-        }
+Setup Event Listener for Page Load:
 
-        // Create li element
-        const li = document.createElement('li');
-        li.textContent = taskText; // textContent must be taskText
+At the beginning of your script, use document.addEventListener to listen for the 'DOMContentLoaded' event. This ensures your JavaScript code runs after the HTML document has fully loaded. Place all your subsequent code inside the callback function of this event listener.
 
-        // Create remove button
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.className = 'remove-btn';
+Select DOM Elements:
 
-        // Add remove functionality
-        removeBtn.onclick = () => {
-            taskList.removeChild(li);
-        };
+Use document.getElementById to select the “Add Task” button and store it in a constant named addButton.
+Similarly, select the input field where users enter tasks (id="task-input") and the unordered list (id="task-list") that will display the tasks. Store these references in constants named taskInput and taskList, respectively.
+Create the addTask Function:
 
-        // Append remove button to li
-        li.appendChild(removeBtn);
+Define a function named addTask. This function will be responsible for adding new tasks to the list.
+Inside addTask, retrieve and trim the value from the task input field. Store this value in a variable named taskText.
+Check if taskText is not empty (“”). If it is empty, use alert to prompt the user to enter a task.
+Task Creation and Removal:
 
-        // Append li to task list
-        taskList.appendChild(li);
+Within the addTask function, if taskText is not empty:
+Create a new li element. Set its textContent to taskText.
+Create a new button element for removing the task. Set its textContent to “Remove”, and give it a class name of ‘remove-btn’.
+Assign an onclick event to the remove button that, when triggered, removes the li element from taskList.
+Append the remove button to the li element, then append the li to taskList. Clear the task input field by setting taskInput.value to an empty string.
+Attach Event Listeners:
 
-        // Clear input field
-        taskInput.value = '';
-    }
-
-    // Event listener for button click
-    addButton.addEventListener('click', addTask);
-
-    // Event listener for Enter key
-    taskInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            addTask();
-        }
-    });
-});
+Add an event listener to addButton that calls addTask when the button is clicked.
+Add an event listener to taskInput for the ‘keypress’ event to allow tasks to be added by pressing the “Enter” key. Inside this event listener, check if event.key is equal to ‘Enter’ before calling addTask
